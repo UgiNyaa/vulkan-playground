@@ -10,4 +10,4 @@ file(GLOB_RECURSE vpg_HEADERS "include/*.hpp")
 
 include_directories(include)
 add_executable(vulkan-playground ${vpg_SOURCES})
-target_link_libraries(vulkan-playground vulkan)
+target_link_libraries(vulkan-playground vulkan xcb)
