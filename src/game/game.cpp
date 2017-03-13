@@ -49,11 +49,19 @@ Game::Game(std::string name)
 
     std::cout << "initializing pipeline layout" << '\n';
     init_pipeline_layout();
+    std::cout << "initializing descriptor set" << '\n';
+    init_descriptor_set();
+
+    std::cout << "initializing render pass" << '\n';
+    init_render_pass();
 }
 
 Game::~Game()
 {
     std::cout << "destorying" << '\n';
+
+    vkDestroyDescriptorPool(device, descPool, NULL);
+
     for (size_t i = 0; i < imageViews.size(); i++)
         vkDestroyImageView(device, imageViews[i], NULL);
 

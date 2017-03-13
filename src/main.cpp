@@ -4,7 +4,7 @@
 //#include <xcb/xcb.h>
 
 #define VK_USE_PLATFORM_XCB_KHR
-#include <vulkan/vulkan.hpp>
+#include <vulkan/vulkan.h>
 
 #include <game/game.hpp>
 

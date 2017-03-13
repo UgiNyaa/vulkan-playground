@@ -71,4 +71,8 @@ void Game::init_uniform_buffer()
 
     result = vkBindBufferMemory(device, uniform.buf, uniform.mem, 0);
     assert(result == VK_SUCCESS);
+
+    uniform.bufferInfo.buffer = uniform.buf;
+    uniform.bufferInfo.offset = 0;
+    uniform.bufferInfo.range = sizeof(mvp);
 }

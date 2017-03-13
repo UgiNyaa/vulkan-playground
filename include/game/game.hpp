@@ -2,12 +2,15 @@
 #define GAME_HPP
 
 #include <string>
+#include <vector>
+
+#include <string.h>
 
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
 #define VK_USE_PLATFORM_XCB_KHR
-#include <vulkan/vulkan.hpp>
+#include <vulkan/vulkan.h>
 
 /* Number of samples needs to be the same at image creation,      */
 /* renderpass creation and pipeline creation.                     */
@@ -27,6 +30,8 @@ private:
     VkCommandBuffer commandbuffer;
     VkFormat format;
     VkPipelineLayout pipelineLayout;
+    VkDescriptorPool descPool;
+    VkRenderPass renderPass;
 
     // major khr variables
     VkSurfaceKHR surface;
@@ -34,6 +39,7 @@ private:
 
     std::vector<VkImageView> imageViews;
     std::vector<VkDescriptorSetLayout> descLayout;
+    std::vector<VkDescriptorSet> descSets;
 
     struct
     {
@@ -47,7 +53,7 @@ private:
     {
         VkBuffer buf;
         VkDeviceMemory mem;
-        VkDescriptorBufferInfo buffer_info;
+        VkDescriptorBufferInfo bufferInfo;
     } uniform;
 
     // enumeration results
@@ -81,6 +87,8 @@ private:
     void init_depth_buffer();
     void init_uniform_buffer();
     void init_pipeline_layout();
+    void init_descriptor_set();
+    void init_render_pass();
 
     void init_surface();
     void init_swapchain();
