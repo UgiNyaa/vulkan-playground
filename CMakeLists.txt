@@ -5,9 +5,8 @@ set(CMAKE_CXX_FLAGS "-Wall")
 
 project(vulkan-playground)
 
-file(GLOB_RECURSE vpg_SOURCES "src/*.cpp")
-file(GLOB_RECURSE vpg_HEADERS "include/*.hpp")
+file(GLOB_RECURSE vpg_SOURCES_HEADERS "src/*.cpp" "include/*.hpp")
 
 include_directories(include)
-add_executable(vulkan-playground ${vpg_SOURCES})
+add_executable(vulkan-playground ${vpg_SOURCES_HEADERS})
 target_link_libraries(vulkan-playground vulkan xcb)
