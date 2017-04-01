@@ -36,8 +36,6 @@ Game::Game(std::string name)
     init_format();
     std::cout << "initializing swapchain" << '\n';
     init_swapchain();
-    std::cout << "initializing image views" << '\n';
-    init_image_views();
 
     std::cout << "initializing command pool" << '\n';
     init_command_pool();
@@ -54,16 +52,25 @@ Game::Game(std::string name)
 
     std::cout << "initializing render pass" << '\n';
     init_render_pass();
+
+    std::cout << "initializing shaders" << '\n';
+    init_shaders();
 }
 
 Game::~Game()
 {
     std::cout << "destorying" << '\n';
 
+    vkDestroyShaderModule(device, shaderStages[0].module, NULL);
+    vkDestroyShaderModule(device, shaderStages[1].module, NULL);
+
     vkDestroyDescriptorPool(device, descPool, NULL);
 
-    for (size_t i = 0; i < imageViews.size(); i++)
-        vkDestroyImageView(device, imageViews[i], NULL);
+    for (size_t i = 0; i < swapchainBuffers.size(); i++)
+    {
+        vkDestroyImageView(device, swapchainBuffers[i].view, NULL);
+        vkDestroyImage(device, swapchainBuffers[i].image, NULL);
+    }
 
     vkDestroyBuffer(device, uniform.buf, NULL);
     vkFreeMemory(device, uniform.mem, NULL);

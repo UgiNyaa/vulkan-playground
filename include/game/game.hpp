@@ -17,6 +17,12 @@
 #define NUM_SAMPLES VK_SAMPLE_COUNT_1_BIT
 #define NUM_DESCRIPTOR_SETS 1
 
+struct SwapchainBuffer
+{
+    VkImage image;
+    VkImageView view;
+};
+
 class Game
 {
 private:
@@ -32,12 +38,14 @@ private:
     VkPipelineLayout pipelineLayout;
     VkDescriptorPool descPool;
     VkRenderPass renderPass;
+    VkPipelineShaderStageCreateInfo shaderStages[2];
 
     // major khr variables
     VkSurfaceKHR surface;
     VkSwapchainKHR swapchain;
 
-    std::vector<VkImageView> imageViews;
+    std::vector<SwapchainBuffer> swapchainBuffers;
+    std::vector<VkImage> images;
     std::vector<VkDescriptorSetLayout> descLayout;
     std::vector<VkDescriptorSet> descSets;
 
@@ -89,6 +97,7 @@ private:
     void init_pipeline_layout();
     void init_descriptor_set();
     void init_render_pass();
+    void init_shaders();
 
     void init_surface();
     void init_swapchain();
@@ -96,7 +105,6 @@ private:
     void enumerate_physical_devices();
     void enumerate_queue_family_properties();
     void init_graphics_presenting_queue();
-    void init_image_views();
 
     void init_window_connection();
     void init_window();
