@@ -39,13 +39,14 @@ private:
     VkDescriptorPool descPool;
     VkRenderPass renderPass;
     VkPipelineShaderStageCreateInfo shaderStages[2];
+    VkPipeline pipeline;
 
     // major khr variables
     VkSurfaceKHR surface;
     VkSwapchainKHR swapchain;
 
     std::vector<SwapchainBuffer> swapchainBuffers;
-    std::vector<VkImage> images;
+    std::vector<VkFramebuffer> framebuffers;
     std::vector<VkDescriptorSetLayout> descLayout;
     std::vector<VkDescriptorSet> descSets;
 
@@ -63,6 +64,14 @@ private:
         VkDeviceMemory mem;
         VkDescriptorBufferInfo bufferInfo;
     } uniform;
+
+    struct {
+        VkBuffer buf;
+        VkDeviceMemory mem;
+        VkDescriptorBufferInfo buffer_info;
+    } vertexBuffer;
+    VkVertexInputBindingDescription viBinding;
+    VkVertexInputAttributeDescription viAttribs[2];
 
     // enumeration results
     uint32_t queueFamilyCount;
@@ -98,6 +107,9 @@ private:
     void init_descriptor_set();
     void init_render_pass();
     void init_shaders();
+    void init_frame_buffers();
+    void init_vertex_buffer();
+    void init_pipeline();
 
     void init_surface();
     void init_swapchain();

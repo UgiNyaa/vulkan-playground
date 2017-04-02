@@ -30,7 +30,7 @@ void Game::init_uniform_buffer()
     bufferCreateInfo.flags = 0;
 
     auto result = vkCreateBuffer(device, &bufferCreateInfo, NULL, &uniform.buf);
-    assert(result == VK_SUCCESS);
+    check(result == VK_SUCCESS);
 
     VkMemoryRequirements memoryReqs;
     vkGetBufferMemoryRequirements(device, uniform.buf, &memoryReqs);

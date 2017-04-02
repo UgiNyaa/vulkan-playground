@@ -55,11 +55,22 @@ Game::Game(std::string name)
 
     std::cout << "initializing shaders" << '\n';
     init_shaders();
+
+    std::cout << "initializing framebuffers" << '\n';
+    init_frame_buffers();
+
+    std::cout << "initializing vertex buffer" << '\n';
+    init_vertex_buffer();
+
+    std::cout << "initializing pipeline" << '\n';
+    init_pipeline();
 }
 
 Game::~Game()
 {
     std::cout << "destorying" << '\n';
+
+    vkDestroyPipeline(device, pipeline, NULL);
 
     vkDestroyShaderModule(device, shaderStages[0].module, NULL);
     vkDestroyShaderModule(device, shaderStages[1].module, NULL);
@@ -74,6 +85,9 @@ Game::~Game()
 
     vkDestroyBuffer(device, uniform.buf, NULL);
     vkFreeMemory(device, uniform.mem, NULL);
+
+    vkDestroyBuffer(device, vertexBuffer.buf, NULL);
+    vkFreeMemory(device, vertexBuffer.mem, NULL);
 
     vkDestroyImageView(device, depth.view, NULL);
     vkDestroyImage(device, depth.image, NULL);
