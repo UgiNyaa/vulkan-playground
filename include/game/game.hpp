@@ -17,6 +17,11 @@
 #define NUM_SAMPLES VK_SAMPLE_COUNT_1_BIT
 #define NUM_DESCRIPTOR_SETS 1
 
+#define NUM_VIEWPORTS 1
+#define NUM_SCISSORS NUM_VIEWPORTS
+
+#define FENCE_TIMEOUT 100000000
+
 struct SwapchainBuffer
 {
     VkImage image;
@@ -40,6 +45,10 @@ private:
     VkRenderPass renderPass;
     VkPipelineShaderStageCreateInfo shaderStages[2];
     VkPipeline pipeline;
+    VkViewport viewport;
+    VkRect2D scissor;
+    VkQueue graphicsQueue;
+    VkQueue presentingQueue;
 
     // major khr variables
     VkSurfaceKHR surface;
@@ -120,6 +129,8 @@ private:
 
     void init_window_connection();
     void init_window();
+
+    void draw_cube();
 
     bool memory_type_from_properties
     (
