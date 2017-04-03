@@ -24,10 +24,10 @@ Game::Game(std::string name)
     std::cout << "initializing surface" << '\n';
     init_surface();
 
-    std::cout << "initializing device" << '\n';
-    init_device();
     std::cout << "initializing graphics and presenting queue" << '\n';
     init_graphics_presenting_queue();
+    std::cout << "initializing device" << '\n';
+    init_device();
 
     std::cout << "initializing depth buffer" << '\n';
     init_depth_buffer();

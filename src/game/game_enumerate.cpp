@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <game/game.hpp>
 
 void Game::enumerate_physical_devices()

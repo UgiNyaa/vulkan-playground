@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <game/game.hpp>
 
 void Game::init_device()
@@ -27,4 +29,10 @@ void Game::init_device()
 
     auto result = vkCreateDevice(gpus[0], &deviceCreateInfo, NULL, &device);
     check(result == VK_SUCCESS);
+
+    vkGetDeviceQueue(device, graphicsQueueFamilyIndex, 0, &graphicsQueue);
+    if (graphicsQueueFamilyIndex == presentingQueueFamilyIndex)
+        presentingQueue = graphicsQueue;
+    else
+        vkGetDeviceQueue(device, presentingQueueFamilyIndex, 0, &presentingQueue);
 }

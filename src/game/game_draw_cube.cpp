@@ -129,7 +129,6 @@ void Game::draw_cube()
     submit_info[0].pCommandBuffers = cmd_bufs;
     submit_info[0].signalSemaphoreCount = 0;
     submit_info[0].pSignalSemaphores = NULL;
-    std::cout << graphicsQueue << '\n';
     result = vkQueueSubmit(graphicsQueue, 1, submit_info, drawFence);
     check(result == VK_SUCCESS);
 
@@ -152,7 +151,7 @@ void Game::draw_cube()
     result = vkQueuePresentKHR(presentingQueue, &present);
     check(result == VK_SUCCESS);
 
-    usleep((unsigned int)2000);
+    std::cin.ignore();
 
     std::cout << "destroying in draw_cube" << '\n';
     vkDestroySemaphore(device, imageAcquiredSemaphore, NULL);

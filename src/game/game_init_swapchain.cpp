@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <game/game.hpp>
 
 void Game::init_swapchain()
@@ -188,10 +190,4 @@ void Game::init_swapchain()
         );
         check(result == VK_SUCCESS);
     }
-
-    vkGetDeviceQueue(device, graphicsQueueFamilyIndex, 0, &graphicsQueue);
-    if (graphicsQueueFamilyIndex == presentingQueueFamilyIndex)
-        presentingQueue = graphicsQueue;
-    else
-        vkGetDeviceQueue(device, presentingQueueFamilyIndex, 0, &presentingQueue);
 }
